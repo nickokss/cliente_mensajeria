@@ -42,7 +42,7 @@ app.get('/oauth2callback', async (req, res) => {
       oAuth2Client.setCredentials(tokens);
 
       // Redirigir al usuario a la página de inicio
-      res.redirect('/inicio');
+      res.redirect('/buzon');
     } catch (error) {
       console.error('Error al intentar intercambiar el código de autorización:', error);
       res.status(500).send('Error interno del servidor al intercambiar el código');
@@ -52,11 +52,51 @@ app.get('/oauth2callback', async (req, res) => {
   }
 });
 
+// Función para obtener los correos electrónicos
+async function obtenerCorreos(auth) {
+  const gmail = google.gmail({version: 'v1', auth});
+  const res = await gmail.users.messages.list({
+    userId: 'me',
+    labelIds: ['INBOX'],
+    maxResults: 10,
+  });
+
+  const mensajes = res.data.messages;
+  return Promise.all(mensajes.map(async (mensaje) => {
+    const detalle = await gmail.users.messages.get({
+      userId: 'me',
+      id: mensaje.id,
+    });
+    return {
+      id: detalle.data.id,
+      snippet: detalle.data.snippet, // Extracto del mensaje
+      // Puedes añadir más detalles según necesites
+    };
+  }));
+}
+
+app.get('/api/correos', async (req, res) => {
+  if (!oAuth2Client.credentials) {
+    return res.status(401).send('Autenticación requerida');
+  }
+  try {
+    const correos = await obtenerCorreos(oAuth2Client);
+    res.json(correos);
+  } catch (error) {
+    console.error('Error al obtener correos:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
 // Configura Express para servir archivos estáticos del directorio 'public'
 app.use(express.static('public'));
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
 // Ruta para la página de inicio/buzón de correos
-app.get('/inicio', async (req, res) => {
+app.get('/buzon', async (req, res) => {
   if (!oAuth2Client.credentials) {
     return res.redirect('/auth/google');
   }

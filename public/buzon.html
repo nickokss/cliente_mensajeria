@@ -1,14 +1,33 @@
-<!-- Este es un ejemplo básico, puedes expandirlo según tus necesidades -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Buzón de Correos</title>
+    <title>Buzón de Messager</title>
+    <link href="css/styles.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Buzón de Correos</h1>
-    <div id="correos">
-        <!-- Los correos se cargarán aquí mediante JavaScript si decides hacerlo de manera dinámica -->
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4">
+        <h1 class="text-xl font-semibold my-4">Correos Recibidos</h1>
+        <div id="lista-correos" class="space-y-4">
+            <!-- Los correos se cargarán aquí -->
+        </div>
     </div>
+
+    <script>
+        async function cargarCorreos() {
+            const respuesta = await fetch('/api/correos');
+            const correos = await respuesta.json();
+            
+            const contenedor = document.getElementById('lista-correos');
+            correos.forEach(correo => {
+                const elemento = document.createElement('div');
+                elemento.classList.add('bg-white', 'p-4', 'rounded', 'shadow');
+                elemento.textContent = correo.snippet;
+                contenedor.appendChild(elemento);
+            });
+        }
+
+        cargarCorreos();
+    </script>
 </body>
 </html>
