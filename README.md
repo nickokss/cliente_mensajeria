@@ -4,7 +4,10 @@
 - Aquí se usa Google como host del protocolo SMTP, pero podrías usar otros
 > [!IMPORTANT]
 > Es necesario tener una cuenta de Google y obtener las credenciales de OAuth 2.0 aquí https://cloud.google.com/cloud-console?hl=es
-  
+
+> [!IMPORTANT]
+> Esta web usa *tailwind.css* y puedes instalarlo así https://tailwindcss.com/docs/installation
+
 ## Plugins de Node instalados
 Para acceder a los servicios de Google:
 ```sh
