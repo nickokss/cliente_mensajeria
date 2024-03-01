@@ -1,4 +1,4 @@
-# Cliente de mensajería MESSAG-ER
+# MAILWAVE
 - Aplicación de un cliente de mensajería
 - Creado con NODE.JS
 - Aquí se usa Google como host del protocolo SMTP, pero podrías usar otros
