@@ -3,8 +3,8 @@
 - Creado con NODE.JS
 - Aquí se usa Google como host del protocolo SMTP, pero podrías usar otros
 > [!IMPORTANT]
-> Es necesario tener una cuenta de Google y obtener las credenciales de OAuth 2.0 aquí https://cloud.google.com/cloud-console?hl=es
-> A parte de eso ahi dentro en las bibliotecas de API es necesario activar la de Gmail y Personas
+> * Es necesario tener una cuenta de Google y obtener las credenciales de OAuth 2.0 aquí https://cloud.google.com/cloud-console?hl=es
+> * A parte de eso ahi dentro de Google Cloud en las bibliotecas de API es necesario activar la de Gmail y Personas
 
 > [!IMPORTANT]
 > Esta web usa *tailwind.css* y puedes instalarlo así https://tailwindcss.com/docs/installation
