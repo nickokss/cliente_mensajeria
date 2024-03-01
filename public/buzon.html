@@ -2,32 +2,27 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Buzón de Messag-er</title>
+    <title>Buzón de MAILWAVE</title>
     <link href="css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto px-4">
-        <h1 class="text-xl font-semibold my-4">Correos Recibidos</h1>
-        <div id="lista-correos" class="space-y-4">
+<body class="flex">
+    <!-- Barra lateral -->
+    <div class="w-64 h-full fixed bg-gray-800">
+        <ul>
+            <li><a href="#" id="recibidos" class="block p-4 hover:bg-gray-700">Recibidos</a></li>
+            <li><a href="#" id="enviados" class="block p-4 hover:bg-gray-700">Enviados</a></li>
+            <li><a href="#" id="contactos" class="block p-4 hover:bg-gray-700">Contactos</a></li>
+            <li><a href="#" id="eliminados" class="block p-4 hover:bg-gray-700">Eliminados</a></li>
+        </ul>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="flex-1 ml-64 p-8">
+        <h1 class="text-2xl font-bold mb-4">Correos Recibidos</h1>
+        <div id="contenido-principal">
             <!-- Los correos se cargarán aquí -->
         </div>
     </div>
-
-    <script>
-        async function cargarCorreos() {
-            const respuesta = await fetch('/api/correos');
-            const correos = await respuesta.json();
-            
-            const contenedor = document.getElementById('lista-correos');
-            correos.forEach(correo => {
-                const elemento = document.createElement('div');
-                elemento.classList.add('bg-white', 'p-4', 'rounded', 'shadow');
-                elemento.textContent = correo.snippet;
-                contenedor.appendChild(elemento);
-            });
-        }
-
-        cargarCorreos();
-    </script>
+<script src="js/scripts.js"></script>
 </body>
 </html>

@@ -21,6 +21,7 @@ app.get('/auth/google', (req, res) => {
   const scopes = [
     'https://www.googleapis.com/auth/gmail.readonly',
     'https://www.googleapis.com/auth/gmail.send',
+    'https://www.googleapis.com/auth/contacts.readonly'
   ];
 
   const url = oAuth2Client.generateAuthUrl({
@@ -52,8 +53,8 @@ app.get('/oauth2callback', async (req, res) => {
   }
 });
 
-// Función para obtener los correos electrónicos
-async function obtenerCorreos(auth) {
+// OBTENER RECIBIDOS
+async function obtenerRecibidos(auth) {
   const gmail = google.gmail({version: 'v1', auth});
   const res = await gmail.users.messages.list({
     userId: 'me',
@@ -75,15 +76,58 @@ async function obtenerCorreos(auth) {
   }));
 }
 
-app.get('/api/correos', async (req, res) => {
+app.get('/api/recibidos', async (req, res) => {
   if (!oAuth2Client.credentials) {
     return res.status(401).send('Autenticación requerida');
   }
   try {
-    const correos = await obtenerCorreos(oAuth2Client);
+    const correos = await obtenerRecibidos(oAuth2Client);
     res.json(correos);
   } catch (error) {
     console.error('Error al obtener correos:', error);
+    res.status(500).send('Error interno del servidor');
+  }
+});
+
+// OBTENER CONTACTOS
+async function obtenerContactos(auth) {
+    const peopleService = google.people({version: 'v1', auth});
+    try {
+      const res = await peopleService.people.connections.list({
+        resourceName: 'people/me',
+        personFields: 'names,emailAddresses',
+        pageSize: 10,
+      });
+  
+      // Verifica si la respuesta incluye 'connections'
+      if (!res.data.connections) {
+        console.log('No se encontraron contactos.');
+        return []; // Devuelve un arreglo vacío si no hay contactos
+      }
+  
+      const contactos = res.data.connections.map(persona => {
+        return {
+          nombre: persona.names ? persona.names[0].displayName : 'Sin nombre',
+          email: persona.emailAddresses ? persona.emailAddresses[0].value : 'Sin email'
+        };
+      });
+  
+      return contactos;
+    } catch (error) {
+      console.error('Error al obtener contactos:', error);
+      throw error; 
+    }
+}
+
+app.get('/api/contactos', async (req, res) => {
+  if (!oAuth2Client.credentials) {
+    return res.status(401).send('Autenticación requerida');
+  }
+  try {
+    const contactos = await obtenerContactos(oAuth2Client);
+    res.json(contactos);
+  } catch (error) {
+    console.error('Error al obtener contactos:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
