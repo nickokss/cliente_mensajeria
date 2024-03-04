@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <title>Buzón de MAILWAVE</title>
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/styles_buzon.css" rel="stylesheet">
 </head>
-<body class="flex">
+<body class="flex bg-gray-100 text-gray-800">
     <!-- Barra lateral -->
     <div class="w-64 h-full fixed bg-gray-800">
-        <ul>
-            <li><a href="#" id="recibidos" class="block p-4 hover:bg-gray-700">Recibidos</a></li>
-            <li><a href="#" id="enviados" class="block p-4 hover:bg-gray-700">Enviados</a></li>
-            <li><a href="#" id="contactos" class="block p-4 hover:bg-gray-700">Contactos</a></li>
-            <li><a href="#" id="eliminados" class="block p-4 hover:bg-gray-700">Eliminados</a></li>
+        <div class="p-5">
+            <h2 class="text-xl font-semibold">MAILWAVE</h2>
+        </div>
+        <ul class="mt-2">
+            <li><a href="#" id="recibidos" class="block py-2 px-4 hover:bg-gray-700 text-lg">Recibidos</a></li>
+            <li><a href="#" id="enviados" class="block py-2 px-4 hover:bg-gray-700 text-lg">Enviados</a></li>
+            <li><a href="#" id="eliminados" class="block py-2 px-4 hover:bg-gray-700 text-lg">Eliminados</a></li>
+            <li><a href="#" id="contactos" class="block py-2 px-4 hover:bg-gray-700 text-lg">Contactos</a></li>
         </ul>
     </div>
 
     <!-- Contenido principal -->
     <div class="flex-1 ml-64 p-8">
-        <h1 class="text-2xl font-bold mb-4">Correos Recibidos</h1>
+        <h1 id="titulo-seccion" class="text-2xl font-bold mb-4">Correos Recibidos</h1>
+        <!-- Selector para cantidad de correos a mostrar -->
+        <select id="cantidad-mostrar">
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <div id="spinner" class="loader"></div>
         <div id="contenido-principal">
-            <!-- Los correos se cargarán aquí -->
         </div>
     </div>
 <script src="js/scripts.js"></script>

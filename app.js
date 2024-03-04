@@ -59,10 +59,16 @@ async function obtenerRecibidos(auth) {
   const res = await gmail.users.messages.list({
     userId: 'me',
     labelIds: ['INBOX'],
-    maxResults: 10,
+    maxResults: 1000,
   });
 
   const mensajes = res.data.messages;
+
+  if (!mensajes) {
+    console.log('No se encontraron mensajes recibidos.');
+    return [];
+  }
+
   return Promise.all(mensajes.map(async (mensaje) => {
     const detalle = await gmail.users.messages.get({
       userId: 'me',
@@ -86,6 +92,98 @@ app.get('/api/recibidos', async (req, res) => {
   } catch (error) {
     console.error('Error al obtener correos:', error);
     res.status(500).send('Error interno del servidor');
+  }
+});
+
+// OBTENER ENVIADOS
+async function obtenerEnviados(auth) {
+  const gmail = google.gmail({version: 'v1', auth});
+  try {
+      const res = await gmail.users.messages.list({
+          userId: 'me',
+          labelIds: ['SENT'],
+          maxResults: 10,
+      });
+
+      const mensajes = res.data.messages;
+      if (!mensajes) {
+          console.log('No se encontraron mensajes enviados.');
+          return [];
+      }
+
+      return Promise.all(mensajes.map(async (mensaje) => {
+          const detalle = await gmail.users.messages.get({
+              userId: 'me',
+              id: mensaje.id,
+          });
+          return {
+              id: detalle.data.id,
+              snippet: detalle.data.snippet, // Extracto del mensaje
+              // Puedes añadir más detalles según necesites
+          };
+      }));
+  } catch (error) {
+      console.error('Error al obtener mensajes enviados:', error);
+      throw error;
+  }
+}
+
+app.get('/api/enviados', async (req, res) => {
+  if (!oAuth2Client.credentials) {
+      return res.status(401).send('Autenticación requerida');
+  }
+  try {
+      const mensajes = await obtenerEnviados(oAuth2Client);
+      res.json(mensajes);
+  } catch (error) {
+      console.error('Error al obtener mensajes eliminados:', error);
+      res.status(500).send('Error interno del servidor');
+  }
+});
+
+// OBTENER ELIMINADOS
+async function obtenerEliminados(auth) {
+  const gmail = google.gmail({version: 'v1', auth});
+  try {
+      const res = await gmail.users.messages.list({
+          userId: 'me',
+          labelIds: ['TRASH'],
+          maxResults: 10,
+      });
+
+      const mensajes = res.data.messages;
+      if (!mensajes) {
+          console.log('No se encontraron mensajes eliminados.');
+          return [];
+      }
+
+      return Promise.all(mensajes.map(async (mensaje) => {
+          const detalle = await gmail.users.messages.get({
+              userId: 'me',
+              id: mensaje.id,
+          });
+          return {
+              id: detalle.data.id,
+              snippet: detalle.data.snippet, // Extracto del mensaje
+              // Puedes añadir más detalles según necesites
+          };
+      }));
+  } catch (error) {
+      console.error('Error al obtener mensajes eliminados:', error);
+      throw error;
+  }
+}
+
+app.get('/api/eliminados', async (req, res) => {
+  if (!oAuth2Client.credentials) {
+      return res.status(401).send('Autenticación requerida');
+  }
+  try {
+      const mensajes = await obtenerEliminados(oAuth2Client);
+      res.json(mensajes);
+  } catch (error) {
+      console.error('Error al obtener mensajes eliminados:', error);
+      res.status(500).send('Error interno del servidor');
   }
 });
 
