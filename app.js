@@ -76,7 +76,8 @@ async function obtenerRecibidos(auth) {
     });
     return {
       id: detalle.data.id,
-      snippet: detalle.data.snippet, // Extracto del mensaje
+      snippet: detalle.data.snippet,
+      fullContent: detalle.data.fullContent, // Extracto del mensaje
       // Puedes añadir más detalles según necesites
     };
   }));
@@ -118,7 +119,8 @@ async function obtenerEnviados(auth) {
           });
           return {
               id: detalle.data.id,
-              snippet: detalle.data.snippet, // Extracto del mensaje
+              snippet: detalle.data.snippet,
+              fullContent: detalle.data.fullContent, // Extracto del mensaje
               // Puedes añadir más detalles según necesites
           };
       }));
@@ -164,7 +166,8 @@ async function obtenerEliminados(auth) {
           });
           return {
               id: detalle.data.id,
-              snippet: detalle.data.snippet, // Extracto del mensaje
+              snippet: detalle.data.snippet,
+              fullContent: detalle.data.fullContent, // Extracto del mensaje
               // Puedes añadir más detalles según necesites
           };
       }));

@@ -47,15 +47,30 @@ function ocultarSpinner() {
 
 // Función para mostrar los correos basada en la cantidad seleccionada
 function mostrarCorreos(correos) {
+    document.getElementById('cantidad-mostrar').style.display = 'block';
     const cantidadMostrar = parseInt(document.getElementById('cantidad-mostrar').value);
     const contenidoCorreos = document.getElementById('contenido-principal');
     contenidoCorreos.innerHTML = ''; // Limpiar contenido anterior
-    
+
     correos.slice(0, cantidadMostrar).forEach(mensaje => {
-        const elemento = document.createElement('div');
-        elemento.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4');
-        elemento.textContent = mensaje.snippet; // Asegúrate de estructurar esto como necesites
-        contenidoCorreos.appendChild(elemento);
+        const correoDiv = document.createElement('div');
+        correoDiv.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4', 'w-full');
+
+        // Crear y añadir el snippet del correo
+        const snippetDiv = document.createElement('div');
+        snippetDiv.textContent = mensaje.snippet;
+        correoDiv.appendChild(snippetDiv);
+
+        // Crear y añadir el botón de expansión
+        const expandBtn = document.createElement('button');
+        expandBtn.textContent = 'Ver más';
+        expandBtn.classList.add('mt-2', 'text-blue-500');
+        expandBtn.addEventListener('click', function() {
+            snippetDiv.textContent = mensaje.fullContent || mensaje.snippet; // Aquí necesitarás asegurarte de tener acceso al contenido completo del correo
+        });
+        correoDiv.appendChild(expandBtn);
+
+        contenidoCorreos.appendChild(correoDiv);
     });
 }
 
@@ -103,6 +118,7 @@ function cargarEliminados() {
 }
 
 function cargarContactos() {
+    document.getElementById('cantidad-mostrar').style.display = 'none';
     fetch('/api/contactos')
         .then(response => {
             if (!response.ok) {
