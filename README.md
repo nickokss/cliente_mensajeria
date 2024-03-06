@@ -9,9 +9,6 @@
 > [!IMPORTANT]
 > Esta web usa *tailwind.css* y puedes instalarlo así https://tailwindcss.com/docs/installation
 
-> [!TIP]
-> Para el fondo de la web se usa uvcanvas https://uvcanvas.com/docs/installation
-
 ## Plugins de Node instalados
 Para acceder a los servicios de Google:
 ```sh
