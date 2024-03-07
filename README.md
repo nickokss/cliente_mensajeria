@@ -6,9 +6,6 @@
 > * Es necesario tener una cuenta de Google y obtener las credenciales de OAuth 2.0 aquí https://cloud.google.com/cloud-console?hl=es
 > * A parte de eso ahi dentro de Google Cloud en las bibliotecas de API es necesario activar la de Gmail y Personas
 
-> [!IMPORTANT]
-> Esta web usa *tailwind.css* y puedes instalarlo así https://tailwindcss.com/docs/installation
-
 ## Plugins de Node instalados
 Para acceder a los servicios de Google:
 ```sh
