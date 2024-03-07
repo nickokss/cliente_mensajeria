@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Buzón de MAILWAVE</title>
-    <link href="css/styles.css" rel="stylesheet">
+    <link rel="icon" href="img/logo-app.png" type="image/png">
     <link href="css/styles_buzon.css" rel="stylesheet">
 </head>
-<body class="flex bg-gray-100 text-gray-800">
+<body class="body-buzon">
     <!-- Barra lateral -->
-    <div class="w-64 h-full fixed bg-gray-800 text-white">
-        <div class="text-center">
-            <h2 class="text-2xl font-bold mb-4">MAILWAVE</h2>
+    <div class="menu-lateral">
+        <div class="titulo-logo">
+            <img src="img/logo-app.png" alt="Logo" class="logo">
         </div>
-        <ul class="mt-10 space-y-4">
-            <li><a href="#" id="recibidos" class="block py-2 px-4 rounded-lg hover:bg-gray-700 text-lg">Recibidos</a></li>
-            <li><a href="#" id="enviados" class="block py-2 px-4 rounded-lg hover:bg-gray-700 text-lg">Enviados</a></li>
-            <li><a href="#" id="eliminados" class="block py-2 px-4 rounded-lg hover:bg-gray-700 text-lg">Eliminados</a></li>
-            <li><a href="#" id="contactos" class="block py-2 px-4 rounded-lg hover:bg-gray-700 text-lg">Contactos</a></li>
+        <ul class="menu-lateral-ul">
+            <li><a href="#" id="recibidos" class="menu-lateral-link">Recibidos</a></li>
+            <li><a href="#" id="enviados" class="menu-lateral-link">Enviados</a></li>
+            <li><a href="#" id="eliminados" class="menu-lateral-link">Eliminados</a></li>
+            <li><a href="#" id="contactos" class="menu-lateral-link">Contactos</a></li>
         </ul>
     </div>
 
     <!-- Contenido principal -->
-    <div class="flex-1 ml-64 p-8">
-        <div id="titulo-seccion" class="text-center text-2xl font-bold mb-4">Correos Recibidos</div>
-        <!-- Selector para cantidad de correos a mostrar -->
-        <select id="cantidad-mostrar" class="border border-gray-400 rounded-md p-2">
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
+    <div class="secciones">
+        <div class="selector-cantidad">
+            <div id="titulo-seccion" class="titulo-seccion"><b>Correos Recibidos</b></div>
+            <!-- Selector para cantidad de correos a mostrar -->
+            <select id="cantidad-mostrar" class="cantidad-mostrar">
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
         <div id="spinner" class="loader"></div>
-        <div id="contenido-principal">
+        <div id="contenido-principal" class="contenido-principal">
         </div>
     </div>
 <script src="js/scripts.js"></script>

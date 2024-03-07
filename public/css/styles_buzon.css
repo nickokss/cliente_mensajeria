@@ -1,9 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+@keyframes fondoOlas {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.body-buzon {
+  display: flex;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #2a2b2b, #41688f, #b0b3b4, #dfe0e2);
+  background-size: 400% 400%;
+  animation: fondoOlas 15s ease infinite;
+}
+
+.secciones {
+  background: #fff;
+  width: 100%;
+}
+
+.titulo-seccion{
+  font-size: 20px;
+}
+
+.selector-cantidad{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10px;
+  padding-right: 20px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.cantidad-mostrar {
+  border: 2px solid #d1d5db; /* Color del borde */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Padding interno */
+  outline: none; /* Remover el outline al enfocar */
+  cursor: pointer; /* Cursor tipo puntero */
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.cantidad-mostrar:hover {
+  border-color: #a0aec0; /* Color al pasar el ratón */
+}
+
+.menu-lateral {
+  width: 250px;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+}
+
+.contenido-principal {
+  padding-right: 12px;
+}
+
+.correo {
+  background: #f3f1f1;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px; /* Bordes redondeados para los correos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Para centrar el título y logo dentro del div-container y ajustar el logo */
+.titulo-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espacio entre el logo y el título */
+}
+
+.logo {
+  height: 50px; 
+}
+
+.menu-lateral-ul {
+  list-style-type: none;
+  margin-top: 20px;
+  line-height: 3;
+}
+
+.menu-lateral-link {
+  text-decoration: none; 
+  color: inherit;
+  padding: 10px;
+}
+
+.menu-lateral-link.active {
+  background-color: #f3f1f1;
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: bold;
+}
+
 .loader {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    border: 10px solid #f3f1f1;
+    border-top: 10px solid #41688f;
+    border-radius: 42%;
+    width: 30px;
+    height: 30px;
     animation: spin 2s linear infinite;
     margin: auto;
     display: block;

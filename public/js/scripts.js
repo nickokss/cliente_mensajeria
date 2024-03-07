@@ -31,6 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // puedes llamar a la función correspondiente. Aquí un ejemplo llamando a cargarRecibidos:
         cargarRecibidos();
     });
+
+    document.querySelectorAll('.menu-lateral-link').forEach(link => {
+        link.addEventListener('click', function() {
+          document.querySelectorAll('.menu-lateral-link').forEach(item => {
+            item.classList.remove('active');
+          });
+          this.classList.add('active');
+        });
+      });
 });
 
 function actualizarTituloSeccion(titulo) {
@@ -54,7 +63,7 @@ function mostrarCorreos(correos) {
 
     correos.slice(0, cantidadMostrar).forEach(mensaje => {
         const correoDiv = document.createElement('div');
-        correoDiv.classList.add('bg-white', 'p-4', 'rounded', 'shadow', 'mb-4', 'w-full');
+        correoDiv.className = 'correo';
 
         // Crear y añadir el snippet del correo
         const snippetDiv = document.createElement('div');
@@ -64,7 +73,6 @@ function mostrarCorreos(correos) {
         // Crear y añadir el botón de expansión
         const expandBtn = document.createElement('button');
         expandBtn.textContent = 'Ver más';
-        expandBtn.classList.add('mt-2', 'text-blue-500');
         expandBtn.addEventListener('click', function() {
             snippetDiv.textContent = mensaje.fullContent || mensaje.snippet; // Aquí necesitarás asegurarte de tener acceso al contenido completo del correo
         });

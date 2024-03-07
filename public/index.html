@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>MAILWAVE</title>
+    <link rel="icon" href="img/logo-app.png" type="image/png">
     <link href="css/styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-    <div class="text-center bg-white p-8 shadow rounded">
-        <h1 class="text-4xl font-bold mb-2">MAILWAVE</h1>
-        <p class="mb-4">Para acceder a tu buzón de correos, necesitas iniciar sesión con Google.</p>
-        <a href="/auth/google" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+<body class="body-acceso">
+    <div class="div-container">
+        <!-- Envuelve el título y el logo en un div y usa flexbox para alinearlos -->
+        <div class="titulo-logo">
+            <img src="img/logo-app.png" alt="Logo" class="logo">
+            <h1 class="h1-titulo-web">MAILWAVE</h1>
+        </div>
+        <p class="frase-acceso">Para acceder a tu buzón de correos, necesitas iniciar sesión con Google.</p>
+        <a href="/auth/google" class="boton-google">
             Iniciar Sesión con Google
         </a>
     </div>
