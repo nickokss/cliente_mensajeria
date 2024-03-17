@@ -53,11 +53,18 @@
   border-color: #a0aec0; /* Color al pasar el ratón */
 }
 
+.menu-lateral-link i {
+  margin-right: 8px; /* Ajusta el espacio entre el icono y el texto */
+  color: #41688f; /* Cambia el color del icono */
+  font-size: 1.2em; /* Aumenta el tamaño del icono */
+}
+
 .menu-lateral {
   width: 250px;
   background: #fff;
   padding: 10px;
   box-shadow: 4px 0px 5px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+  color:#41688f;
 }
 
 .contenido-principal {
